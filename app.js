@@ -19,9 +19,16 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
+// app.use('/', indexRouter);
 // app.use('/users', usersRouter);
 
+app.get('/*', async (req, res) => {
+
+  await new Promise((resolve) => setTimeout(resolve, 10 * 1000));
+  res.send({
+    hello: 'World'
+  });
+});
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
