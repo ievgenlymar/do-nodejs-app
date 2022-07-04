@@ -23,8 +23,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 // app.use('/users', usersRouter);
 
 app.get('/*', async (req, res) => {
-
-  await new Promise((resolve) => setTimeout(resolve, 10 * 1000));
+  const timeout = req.query.timeout ? Number(req.query.timeout) : 60;
+  await new Promise((resolve) => setTimeout(resolve, timeout * 1000));
   res.send({
     hello: 'World'
   });
